@@ -5,7 +5,7 @@ import subprocess
 iterations_between_saving = "50"
 
 
-cmd_eval = "evaluate.py --checkpoint checkpoints --in-path ev.jpg --out-path out.jpg"
+cmd_eval = ["evaluate.py ", "--checkpoint ", "CHANGE THIS", "--in-path ","CHANGE THIS","--out-path " "out.jpg"]
 cmd_train = ["style.py ", "--checkpoint-dir ", "CHANGE THIS", "--style ", "CHANGE THIS", "--checkpoint-iterations ", iterations_between_saving]
 
 
@@ -23,7 +23,12 @@ def train():
     
 def evaluate():
     print("Evaluate")
-    subprocess.Popen(cmd_eval, shell=True)
+    path= os.path.join("models", tkvar.get()).replace("\\","/")
+    cmd_eval[2] = path + " "
+    cmd_eval[4] = "in.jpg "
+    command = "".join(cmd_eval)
+    print(command)
+    subprocess.Popen(command, shell=True)
     
 def createModel():
     print("Create Model")
