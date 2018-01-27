@@ -77,6 +77,9 @@ Use `transform_video.py` to transfer style into a video. Run `python transform_v
       --out-path out/video.mp4 \
       --device /gpu:0 \
       --batch-size 4
+  
+### Graphical User Interface
+Start Helper.py to create new models, train them and evaluate them. Functionality is still very basic, but working.
 
 ### Requirements
 You will need the following to run the above:
