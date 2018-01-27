@@ -1,4 +1,5 @@
 from __future__ import print_function
+import scipy.misc
 import sys, os, pdb
 sys.path.insert(0, 'src')
 import numpy as np, scipy.misc 
@@ -95,6 +96,7 @@ def check_opts(opts):
         exists(opts.test, "test img not found!")
         exists(opts.test_dir, "test directory not found!")
     exists(opts.vgg_path, "vgg network data not found!")
+    print("Directories OK")
     assert opts.epochs > 0
     assert opts.batch_size > 0
     assert opts.checkpoint_iterations > 0
@@ -105,6 +107,7 @@ def check_opts(opts):
     assert opts.learning_rate >= 0
 
 def _get_files(img_dir):
+    print("Getting files")
     files = list_files(img_dir)
     return [os.path.join(img_dir,x) for x in files]
 
@@ -148,6 +151,9 @@ def main():
         style_loss, content_loss, tv_loss, loss = losses
 
         print('Epoch %d, Iteration: %d, Loss: %s' % (epoch, i, loss))
+        file = open("log.txt", "a")
+        file.write('Epoch %d, Iteration: %d, Loss: %s' % (epoch, i, loss))
+        file.close()
         to_print = (style_loss, content_loss, tv_loss)
         print('style: %s, content:%s, tv: %s' % to_print)
         if options.test:
